@@ -1,19 +1,13 @@
----
-title:PA1_template
-author: JinYeKim
-date: Febuary 8, 2015
-outputL md_document
---
 PA1_template
 ------------------------------------------------------------------
 **1. Loading and preprocessing the data**
 
 Load the data
 Convert data into calender date
+
 ```{r
 data <- read.csv("activity.csv")
 data$date <- as.Date(data$date, format="%Y-%m-%d")}
-
 ```
 
 
@@ -25,6 +19,7 @@ Plot histogram
 Calculate mean of the total number of steps taken per day
 CAREFUL, use 'sum_steps' instead of 'Sum_steps' because 'Sum_steps' was   converted by as.numeric function
 Calculate median of the total number of steps taken per day
+
 ```{r
 sum_steps<-aggregate(x=data$steps, by=list(data$date),FUN=sum, na.rm=TRUE)
 names(sum_steps) <- c("date","steps")
@@ -33,7 +28,6 @@ hist(Sum_steps, main="Sum of steps per day", col="pink")
 mean(sum_steps$steps)
 median(sum_steps$steps)
 }
-
 ```
 
 
@@ -42,17 +36,18 @@ median(sum_steps$steps)
 avgerage steps time series plot
 plot time series
 interval that contains max number of steps
+
 ```{r
 avg_steps <- aggregate(x=data$steps, by=list(data$interval), FUN=sum, na.rm=TRUE)
 names(avg_steps) <- c("interval","steps")
 plot(avg_steps$interval, avg_steps$steps, type="l", col="pink", main="Time-series of average steps per 5-m intervals")
 avg_steps[which.max(avg_steps$steps), c("interval")]
 }
-
 ```
 
 
 **4. Imputing missing values**
+
 Ccalculate missing value numbers
 For convenience the missing values are 0
 Replace na with 0s
@@ -62,6 +57,7 @@ Calculate mean of the total number of steps taken per day with na
 CAREFUL, use 'sum_steps2' instead of 'Sum_steps2' because 'Sum_steps2'     was converted by as.numeric function
 Calculate median of the total number of steps taken per day with na
 Well... na=0 so mean and median didn't change. Cannot know the impact of imputing missing values.
+
 ```{r
 nrow(data[is.na(data$steps),])
 na <- which(is.na(data$steps))
@@ -75,7 +71,6 @@ mean(sum_steps2$steps)
 median(sum_steps2$steps)
 
 }
-
 ```
 
 
@@ -99,7 +94,4 @@ par(mfrow=c(2,1))
 plot(data.weekend, main="weekend", col="lightblue", type="l")
 plot(data.weekday, main="weekday", col="lightblue", type="l")
 }
-
 ```
-
-knit2html() 
