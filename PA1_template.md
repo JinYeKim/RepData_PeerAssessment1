@@ -5,9 +5,9 @@ PA1_template
 Load the data
 Convert data into calender date
 
-```{r
+```{r}
 data <- read.csv("activity.csv")
-data$date <- as.Date(data$date, format="%Y-%m-%d")}
+data$date <- as.Date(data$date, format="%Y-%m-%d")
 ```
 
 
@@ -20,14 +20,14 @@ Calculate mean of the total number of steps taken per day
 CAREFUL, use 'sum_steps' instead of 'Sum_steps' because 'Sum_steps' was   converted by as.numeric function
 Calculate median of the total number of steps taken per day
 
-```{r
+```{r}
 sum_steps<-aggregate(x=data$steps, by=list(data$date),FUN=sum, na.rm=TRUE)
 names(sum_steps) <- c("date","steps")
 Sum_steps <- sapply(sum_steps, as.numeric)
 hist(Sum_steps, main="Sum of steps per day", col="pink")
 mean(sum_steps$steps)
 median(sum_steps$steps)
-}
+
 ```
 
 
@@ -37,12 +37,12 @@ avgerage steps time series plot
 plot time series
 interval that contains max number of steps
 
-```{r
+```{r}
 avg_steps <- aggregate(x=data$steps, by=list(data$interval), FUN=sum, na.rm=TRUE)
 names(avg_steps) <- c("interval","steps")
 plot(avg_steps$interval, avg_steps$steps, type="l", col="pink", main="Time-series of average steps per 5-m intervals")
 avg_steps[which.max(avg_steps$steps), c("interval")]
-}
+
 ```
 
 
@@ -58,7 +58,7 @@ CAREFUL, use 'sum_steps2' instead of 'Sum_steps2' because 'Sum_steps2'     was c
 Calculate median of the total number of steps taken per day with na
 Well... na=0 so mean and median didn't change. Cannot know the impact of imputing missing values.
 
-```{r
+```{r}
 nrow(data[is.na(data$steps),])
 na <- which(is.na(data$steps))
 zero <- rep(0, times=length(na))
@@ -70,7 +70,6 @@ hist(Sum_steps2, main="Sum of steps per day with na", col="pink")
 mean(sum_steps2$steps)
 median(sum_steps2$steps)
 
-}
 ```
 
 
@@ -81,7 +80,7 @@ new factor variable of average weekday and average weekend
 organize
 plotting
 
-```{r
+```{r}
 data.weekend <- subset(data.impute, weekdays(date) %in% c("Saturday", "Sunday"))
 data.weekday <- subset(data.impute, !weekdays(date) %in% c("Saturday", "Sunday"))
 data.weekend <- aggregate(steps ~ interval, data.weekend, mean)
@@ -93,5 +92,4 @@ levels(data.week$day) <- c("Weekend", "Weekday")
 par(mfrow=c(2,1))
 plot(data.weekend, main="weekend", col="lightblue", type="l")
 plot(data.weekday, main="weekday", col="lightblue", type="l")
-}
 ```

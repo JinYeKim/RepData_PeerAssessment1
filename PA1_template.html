@@ -65,27 +65,27 @@ img {
 <h2>PA1_template</h2>
 <p><strong>1. Loading and preprocessing the data</strong></p>
 <p>Load the data Convert data into calender date</p>
-<pre class="{r"><code>data &lt;- read.csv(&quot;activity.csv&quot;)
-data$date &lt;- as.Date(data$date, format=&quot;%Y-%m-%d&quot;)}</code></pre>
+<pre class="{r}"><code>data &lt;- read.csv(&quot;activity.csv&quot;)
+data$date &lt;- as.Date(data$date, format=&quot;%Y-%m-%d&quot;)</code></pre>
 <p><strong>2. What is mean total number of steps taken per day?</strong></p>
 <p>Sum steps per day Plot histogram Calculate mean of the total number of steps taken per day CAREFUL, use ‘sum_steps’ instead of ‘Sum_steps’ because ‘Sum_steps’ was converted by as.numeric function Calculate median of the total number of steps taken per day</p>
-<pre class="{r"><code>sum_steps&lt;-aggregate(x=data$steps, by=list(data$date),FUN=sum, na.rm=TRUE)
+<pre class="{r}"><code>sum_steps&lt;-aggregate(x=data$steps, by=list(data$date),FUN=sum, na.rm=TRUE)
 names(sum_steps) &lt;- c(&quot;date&quot;,&quot;steps&quot;)
 Sum_steps &lt;- sapply(sum_steps, as.numeric)
 hist(Sum_steps, main=&quot;Sum of steps per day&quot;, col=&quot;pink&quot;)
 mean(sum_steps$steps)
 median(sum_steps$steps)
-}</code></pre>
+</code></pre>
 <p><strong>3. What is the average daily activity pattern?</strong></p>
 <p>avgerage steps time series plot plot time series interval that contains max number of steps</p>
-<pre class="{r"><code>avg_steps &lt;- aggregate(x=data$steps, by=list(data$interval), FUN=sum, na.rm=TRUE)
+<pre class="{r}"><code>avg_steps &lt;- aggregate(x=data$steps, by=list(data$interval), FUN=sum, na.rm=TRUE)
 names(avg_steps) &lt;- c(&quot;interval&quot;,&quot;steps&quot;)
 plot(avg_steps$interval, avg_steps$steps, type=&quot;l&quot;, col=&quot;pink&quot;, main=&quot;Time-series of average steps per 5-m intervals&quot;)
 avg_steps[which.max(avg_steps$steps), c(&quot;interval&quot;)]
-}</code></pre>
+</code></pre>
 <p><strong>4. Imputing missing values</strong></p>
 <p>Ccalculate missing value numbers For convenience the missing values are 0 Replace na with 0s Sum steps per day with na Plot histogram with na Calculate mean of the total number of steps taken per day with na CAREFUL, use ‘sum_steps2’ instead of ‘Sum_steps2’ because ‘Sum_steps2’ was converted by as.numeric function Calculate median of the total number of steps taken per day with na Well… na=0 so mean and median didn’t change. Cannot know the impact of imputing missing values.</p>
-<pre class="{r"><code>nrow(data[is.na(data$steps),])
+<pre class="{r}"><code>nrow(data[is.na(data$steps),])
 na &lt;- which(is.na(data$steps))
 zero &lt;- rep(0, times=length(na))
 data[na, &quot;steps&quot;] &lt;- zero
@@ -95,11 +95,10 @@ Sum_steps2 &lt;- sapply(sum_steps2, as.numeric)
 hist(Sum_steps2, main=&quot;Sum of steps per day with na&quot;, col=&quot;pink&quot;)
 mean(sum_steps2$steps)
 median(sum_steps2$steps)
-
-}</code></pre>
+</code></pre>
 <p><strong>5. Are there differences in activity patterns between weekdays and weekends?</strong></p>
 <p>new factor variable spliting weekday and weekend new factor variable of average weekday and average weekend organize plotting</p>
-<pre class="{r"><code>data.weekend &lt;- subset(data.impute, weekdays(date) %in% c(&quot;Saturday&quot;, &quot;Sunday&quot;))
+<pre class="{r}"><code>data.weekend &lt;- subset(data.impute, weekdays(date) %in% c(&quot;Saturday&quot;, &quot;Sunday&quot;))
 data.weekday &lt;- subset(data.impute, !weekdays(date) %in% c(&quot;Saturday&quot;, &quot;Sunday&quot;))
 data.weekend &lt;- aggregate(steps ~ interval, data.weekend, mean)
 data.weekday &lt;- aggregate(steps ~ interval, data.weekday, mean)
@@ -109,8 +108,7 @@ data.week &lt;- rbind(data.weekend, data.weekday)
 levels(data.week$day) &lt;- c(&quot;Weekend&quot;, &quot;Weekday&quot;)
 par(mfrow=c(2,1))
 plot(data.weekend, main=&quot;weekend&quot;, col=&quot;lightblue&quot;, type=&quot;l&quot;)
-plot(data.weekday, main=&quot;weekday&quot;, col=&quot;lightblue&quot;, type=&quot;l&quot;)
-}</code></pre>
+plot(data.weekday, main=&quot;weekday&quot;, col=&quot;lightblue&quot;, type=&quot;l&quot;)</code></pre>
 </div>
 
 
