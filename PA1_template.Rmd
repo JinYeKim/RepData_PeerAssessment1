@@ -30,7 +30,7 @@ median(sum_steps$steps)
 
 ```
 
-![withoutNA](c/users/jenny/Desktop/Coursera/RR/withoutNA.png)
+![Figures](withoutNA.png)
 
 mean: 9354.23
 median:10395
@@ -50,7 +50,7 @@ avg_steps[which.max(avg_steps$steps), c("interval")]
 ```
 
 
-![alt text](figures/time_series.png)
+![Figures](figures/time_series.png)
 
 max interval: 835
 
@@ -80,7 +80,7 @@ median(sum_steps2$steps)
 ```
 
 
-![alt text](figures/withNA.png)
+![Figures](withNA.png)
 
 mean:9354.23
 median:10395
@@ -109,4 +109,4 @@ plot(data.weekend, type="l", main="weekend", col="lightblue")
 plot(data.weekday, type="l", main="weekday", col="lightblue")
 ```
 
-![alt text](figures/week.png)
+![Figures](week.png)
