@@ -30,6 +30,10 @@ median(sum_steps$steps)
 
 ```
 
+![alt text](figures/withoutNA.png)
+
+mean: 9354.23
+median:10395
 
 #3. What is the average daily activity pattern?
 
@@ -46,6 +50,10 @@ avg_steps[which.max(avg_steps$steps), c("interval")]
 ```
 
 
+![alt text](figures/time_series.png)
+
+max interval: 835
+
 #4. Imputing missing values
 
 Ccalculate missing value numbers
@@ -56,7 +64,6 @@ Plot histogram with na
 Calculate mean of the total number of steps taken per day with na
 CAREFUL, use 'sum_steps2' instead of 'Sum_steps2' because 'Sum_steps2'     was converted by as.numeric function
 Calculate median of the total number of steps taken per day with na
-Well... na=0 so mean and median didn't change. Cannot know the impact of imputing missing values.
 
 ```{r}
 nrow(data[is.na(data$steps),])
@@ -71,6 +78,14 @@ mean(sum_steps2$steps)
 median(sum_steps2$steps)
 
 ```
+
+
+![alt text](figures/withNA.png)
+
+mean:9354.23
+median:10395
+
+Well... na=0 so mean and median didn't change. Cannot know the impact of imputing missing values.
 
 
 #5. Are there differences in activity patterns between weekdays and weekends?
@@ -93,3 +108,5 @@ par(mfrow=c(2,1))
 plot(data.weekend, main="weekend", col="lightblue", type="l")
 plot(data.weekday, main="weekday", col="lightblue", type="l")
 ```
+
+![alt text](figures/week.png)

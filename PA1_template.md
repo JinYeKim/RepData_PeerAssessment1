@@ -1,6 +1,6 @@
 PA1_template
 ------------------------------------------------------------------
-**1. Loading and preprocessing the data**
+#1. Loading and preprocessing the data
 
 Load the data
 Convert data into calender date
@@ -11,7 +11,7 @@ data$date <- as.Date(data$date, format="%Y-%m-%d")
 ```
 
 
-**2. What is mean total number of steps taken per day?**
+#2. What is mean total number of steps taken per day?
 
 
 Sum steps per day
@@ -30,8 +30,12 @@ median(sum_steps$steps)
 
 ```
 
+![alt text](figures/withoutNA.png)
 
-**3. What is the average daily activity pattern?**
+mean: 9354.23
+median:10395
+
+#3. What is the average daily activity pattern?
 
 avgerage steps time series plot
 plot time series
@@ -46,7 +50,11 @@ avg_steps[which.max(avg_steps$steps), c("interval")]
 ```
 
 
-**4. Imputing missing values**
+![alt text](figures/time_series.png)
+
+max interval: 835
+
+#4. Imputing missing values
 
 Ccalculate missing value numbers
 For convenience the missing values are 0
@@ -56,7 +64,6 @@ Plot histogram with na
 Calculate mean of the total number of steps taken per day with na
 CAREFUL, use 'sum_steps2' instead of 'Sum_steps2' because 'Sum_steps2'     was converted by as.numeric function
 Calculate median of the total number of steps taken per day with na
-Well... na=0 so mean and median didn't change. Cannot know the impact of imputing missing values.
 
 ```{r}
 nrow(data[is.na(data$steps),])
@@ -73,7 +80,15 @@ median(sum_steps2$steps)
 ```
 
 
-**5. Are there differences in activity patterns between weekdays and weekends?**
+![alt text](figures/withNA.png)
+
+mean:9354.23
+median:10395
+
+Well... na=0 so mean and median didn't change. Cannot know the impact of imputing missing values.
+
+
+#5. Are there differences in activity patterns between weekdays and weekends?
 
 new factor variable spliting weekday and weekend
 new factor variable of average weekday and average weekend
@@ -93,3 +108,5 @@ par(mfrow=c(2,1))
 plot(data.weekend, main="weekend", col="lightblue", type="l")
 plot(data.weekday, main="weekday", col="lightblue", type="l")
 ```
+
+![alt text](figures/week.png)
