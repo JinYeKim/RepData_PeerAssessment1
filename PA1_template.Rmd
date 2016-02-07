@@ -1,7 +1,3 @@
----
-title: "PA1"
-author: JinYeKim
-output: html_document
 
 PA1_template
 ------------------------------------------------------------------
@@ -35,7 +31,10 @@ median(sum_steps$steps)
 
 ```
 
+![Figures](withoutNA.png)
 
+mean: 9354.23
+median:10395
 
 #3. What is the average daily activity pattern?
 
@@ -52,6 +51,9 @@ avg_steps[which.max(avg_steps$steps), c("interval")]
 ```
 
 
+![Figures](time_series.png)
+
+max interval: 835
 
 #4. Imputing missing values
 
@@ -79,6 +81,10 @@ median(sum_steps2$steps)
 ```
 
 
+![Figures](withNA.png)
+
+mean:9354.23
+median:10395
 
 Well... na=0 so mean and median didn't change. Cannot know the impact of imputing missing values.
 
@@ -104,3 +110,4 @@ plot(data$steps~data$interval, type="l", main="weekend", col="lightblue")
 plot(data$steps~data$interval, type="l", main="weekday", col="lightblue")
 ```
 
+![Figures](week.png)
