@@ -30,7 +30,7 @@ median(sum_steps$steps)
 
 ```
 
-![alt text](figures/withoutNA.png)
+![Figures](withoutNA.png)
 
 mean: 9354.23
 median:10395
@@ -50,7 +50,7 @@ avg_steps[which.max(avg_steps$steps), c("interval")]
 ```
 
 
-![alt text](figures/time_series.png)
+![Figures](time_series.png)
 
 max interval: 835
 
@@ -80,7 +80,7 @@ median(sum_steps2$steps)
 ```
 
 
-![alt text](figures/withNA.png)
+![Figures](withNA.png)
 
 mean:9354.23
 median:10395
@@ -96,17 +96,17 @@ organize
 plotting
 
 ```{r}
-data.weekend <- subset(data.impute, weekdays(date) %in% c("Saturday", "Sunday"))
-data.weekday <- subset(data.impute, !weekdays(date) %in% c("Saturday", "Sunday"))
-data.weekend <- aggregate(steps ~ interval, data.weekend, mean)
-data.weekday <- aggregate(steps ~ interval, data.weekday, mean)
+data.weekend <- subset(data, weekdays(date) %in% c("Saturday", "Sunday"))
+data.weekday <- subset(data, !weekdays(date) %in% c("Saturday", "Sunday"))
+data.weekend <- aggregate(data$steps ~ data$interval, data.weekend, mean)
+data.weekday <- aggregate(data$steps ~ data$interval, data.weekday, mean)
 data.weekend <- cbind(data.weekend, day = rep("weekend"))
 data.weekday <- cbind(data.weekday, day = rep("weekday"))
 data.week <- rbind(data.weekend, data.weekday)
 levels(data.week$day) <- c("Weekend", "Weekday")
 par(mfrow=c(2,1))
-plot(data.weekend, main="weekend", col="lightblue", type="l")
-plot(data.weekday, main="weekday", col="lightblue", type="l")
+plot(data$steps~data$interval, type="l", main="weekend", col="lightblue")
+plot(data$steps~data$interval, type="l", main="weekday", col="lightblue")
 ```
 
-![alt text](figures/week.png)
+![Figures](week.png)
